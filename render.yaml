@@ -1,0 +1,49 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Render Blueprint — EduCore ERP Backend
+# ──────────────────────────────────────────────────────────────────────────────
+# This file configures the backend deployment on Render.
+# To use: Push this repo to GitHub, then create a new Blueprint in Render.
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+  - type: web
+    name: educore-backend
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false  # Set manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Auto-generate a secure secret
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_EXPIRY
+        value: 24h
+      - key: JWT_REFRESH_EXPIRY
+        value: 7d
+      - key: CORS_ORIGIN
+        sync: false  # Set to your Vercel frontend URL
+      - key: SPLIT_DEPLOYMENT
+        value: "true"
+      - key: SUPER_ADMIN_EMAIL
+        value: admin@educore.edu
+      - key: SUPER_ADMIN_PASSWORD
+        sync: false  # Set a strong password
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+    healthCheckPath: /health
+    # Auto-deploy on push to main branch
+    autoDeploy: true

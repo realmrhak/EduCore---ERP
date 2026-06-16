@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 142.1 76.2% 36.3%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 138 76% 46%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 142.1 70.6% 45.3%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.1 70.6% 45.3%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 142.1 70.6% 45.3%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 142.1 70.6% 45.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Prevent horizontal overflow globally */
+  html,
+  #root {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+/* ============================================
+   INPUT / TEXTAREA FOCUS STYLING
+   ============================================ */
+
+/* Input focus state */
+input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+/* Textarea focus state */
+textarea:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE UTILITIES
+   ============================================ */
+
+@layer utilities {
+  .mobile-overflow-guard {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+/* ============================================
+   MOBILE-SPECIFIC GLOBAL ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  /* Make tables scrollable on mobile */
+  table {
+    min-width: 600px;
+  }
+
+  /* Compact inputs/textareas on mobile */
+  input,
+  textarea {
+    font-size: 16px !important;
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    padding-left: 2.5rem !important;
+    padding-right: 0.6rem !important;
+    min-height: 34px !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #0F172A !important;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  /* Override for inputs that explicitly set bg-white */
+  input.bg-white,
+  textarea.bg-white {
+    background-color: #FFFFFF !important;
+  }
+
+  /* Even more compact for number inputs */
+  input[type="number"] {
+    min-height: 32px !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  /* Placeholder styling */
+  input::placeholder,
+  textarea::placeholder {
+    color: #94A3B8 !important;
+    font-size: 13px;
+  }
+
+  /* Prevent text truncation issues on small screens */
+  .truncate {
+    max-width: 100%;
+  }
+
+  /* Ensure grid children don't overflow */
+  .grid>* {
+    min-width: 0;
+  }
+}
+
+/* ============================================
+   TABLET ADJUSTMENTS
+   ============================================ */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  html {
+    font-size: 15px;
+  }
+}
